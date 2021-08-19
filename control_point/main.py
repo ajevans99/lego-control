@@ -5,10 +5,10 @@ import random
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM) ## Indicates which pin numbering configuration to use
 
-ledMouth = 18
+ledMouth = 8
 
 GPIO.setup(ledMouth, GPIO.OUT)
-GPIO.output(ledMouth,GPIO.HIGH)
+GPIO.output(ledMouth, GPIO.HIGH)
 
 led = GPIO.PWM(ledMouth, 100)
 
