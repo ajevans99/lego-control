@@ -1,0 +1,17 @@
+[Unit]
+Description=LEGO Light Control System
+After=network-online.target
+
+[Service]
+WorkingDirectory=/home/pi/lego_control/client_pi/
+User=pi
+ExecStart=/home/pi/lego_control/client_pi/start.sh
+StandardOutput=syslog
+StandardError=syslog
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+Alias=lego.service
+
