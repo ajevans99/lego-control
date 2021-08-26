@@ -33,7 +33,7 @@ def open_websocket(led):
     }
     ''')
 
-    transport = WebsocketsTransport(url='ws://localhost:8000/graphql')
+    transport = WebsocketsTransport(url='ws://192.168.86.26:8000/graphql')
 
     client = Client(
         transport=transport,
