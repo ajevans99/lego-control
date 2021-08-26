@@ -4,6 +4,8 @@ from gql import gql, Client
 from gql.transport.websockets import WebsocketsTransport
 import RPi.GPIO as GPIO
 
+CONTROL_POINT_ID = 1
+
 def configure_gpio():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM) ## Indicates which pin numbering configuration to use
@@ -16,26 +18,10 @@ def configure_gpio():
     led = GPIO.PWM(ledMouth, 100)
 
     led.start(0)         
-pause_time = 0.02
 
-try:
-    while True:
-        for x in range(0,1):
-            for i in range(0,101):      # 101 because it stops when it finishes 100
-                led.ChangeDutyCycle(i)
-                sleep(pause_time)
-                print(i)
-            for i in range(100,-1,-1):      # from 100 to zero in steps of -1
-                led.ChangeDutyCycle(i)
-                sleep(pause_time)
-                print(i)
+    return led
 
-except KeyboardInterrupt:
-    GPIO.cleanup()
-
-CONTROL_POINT_ID = 1
-
-def open_websocket():
+def open_websocket(led):
     query = gql('''
     subscription ($controlPointId: Int!) {
         lightStripBrightnessMonitor(controlPointId: $controlPointId) {
@@ -56,5 +42,12 @@ def open_websocket():
 
     for result in client.subscribe(query, variable_values={'controlPointId': CONTROL_POINT_ID}):
         print (result)
+        brightness = result['data']['lightStripBrightnessMonitor'['brightness']]
+        print(brightness)
+        led.ChangeDutyCycle(result)
 
-
+try:
+    led = configure_gpio()
+    open_websocket(led)
+except KeyboardInterrupt:
+    GPIO.cleanup()
