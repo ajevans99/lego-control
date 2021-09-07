@@ -13,7 +13,7 @@ fi
 
 # Run API
 
-if docker run -p 6379:6379 -d redis:5; then
+if /home/pi/redis/src/redis-server &>/dev/null & disown; then
     echo "Successfully ran docker with redis"
 else
     echo "Failed to run docker with redis"

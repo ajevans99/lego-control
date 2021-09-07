@@ -43,7 +43,6 @@ class LightStrip(models.Model):
     def post_save(sender, **kwargs):
         instance = kwargs.get('instance')
         created = kwargs.get('created')
-        print("post save")
         if instance.previous_brightness != instance.brightness or created:
             from . import schema
 

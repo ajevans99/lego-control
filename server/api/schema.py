@@ -136,8 +136,6 @@ class ControlPointHeartbeat(channels_graphql_ws.Subscription):
     def publish(payload, info, id):
         """Called to notify the client."""
 
-        print("PUBLISHED")
-
         # Here `payload` contains the `payload` from the `broadcast()`
         # invocation (see below). You can return `MySubscription.SKIP`
         # if you wish to suppress the notification to a particular
@@ -173,8 +171,6 @@ class LightStripBrightnessMonitor(channels_graphql_ws.Subscription):
     @staticmethod
     def publish(payload, info, control_point_id):
         """Called to notify the client."""
-
-        print("PUBLISHED")
 
         # Here `payload` contains the `payload` from the `broadcast()`
         # invocation (see below). You can return `MySubscription.SKIP`

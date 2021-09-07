@@ -42,7 +42,7 @@ function AllLights() {
                 <Form.Label>Brightness</Form.Label>
                 <Form.Range ref={node => { range = node; }} onChange={ e => {
                     changeBrightness({ variables: { brightness: e.target.value }});
-                }} value={brightness}/>
+                }} />
             </Form>
             </Card.Body>
         </Card>

@@ -1,9 +1,14 @@
 # Lego Control
 
-1. Start Redis (Docker must be running)
+1. Start Redis
 
+With Docker:
 ```bash
 docker run -p 6379:6379 -d redis:5
+```
+Or PI:
+```bash
+/home/pi/redis/src/redis-server &>/dev/null & disown
 ```
 
 2. Run local server
