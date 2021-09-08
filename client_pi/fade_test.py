@@ -1,11 +1,11 @@
-import RPi.GPIO as GPIO
-from time import sleep
+import RPi.GPIO as GPIO 
+from time import sleep 
 import random
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM) ## Indicates which pin numbering configuration to use
+GPIO.setwarnings(True)
+GPIO.setmode(GPIO.BOARD) ## Indicates which pin numbering configuration to use
 
-ledMouth = 8
+ledMouth = 3
 
 GPIO.setup(ledMouth, GPIO.OUT)
 GPIO.output(ledMouth, GPIO.HIGH)

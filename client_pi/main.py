@@ -8,16 +8,16 @@ CONTROL_POINT_ID = 1
 
 def configure_gpio():
     GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BCM) ## Indicates which pin numbering configuration to use
+    GPIO.setmode(GPIO.BOARD) ## Indicates which pin numbering configuration to use
 
-    ledMouth = 8
+    ledMouth = 3
 
     GPIO.setup(ledMouth, GPIO.OUT)
     GPIO.output(ledMouth, GPIO.HIGH)
 
     led = GPIO.PWM(ledMouth, 100)
 
-    led.start(0)         
+    led.start(0)
 
     return led
 
@@ -42,9 +42,9 @@ def open_websocket(led):
 
     for result in client.subscribe(query, variable_values={'controlPointId': CONTROL_POINT_ID}):
         print (result)
-        brightness = result['data']['lightStripBrightnessMonitor'['brightness']]
+        brightness = result['lightStripBrightnessMonitor']['brightness']
         print(brightness)
-        led.ChangeDutyCycle(result)
+        led.ChangeDutyCycle(brightness)
 
 while True:
     try:
