@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import time
 from gql import gql, Client
 from gql.transport.websockets import WebsocketsTransport
 import RPi.GPIO as GPIO
@@ -33,7 +33,7 @@ def open_websocket(led):
     }
     ''')
 
-    transport = WebsocketsTransport(url='ws://192.168.86.26:8000/graphql')
+    transport = WebsocketsTransport(url='ws://192.168.86.58:8000/graphql')
 
     client = Client(
         transport=transport,
@@ -46,8 +46,11 @@ def open_websocket(led):
         print(brightness)
         led.ChangeDutyCycle(result)
 
-try:
-    led = configure_gpio()
-    open_websocket(led)
-except KeyboardInterrupt:
-    GPIO.cleanup()
+while True:
+    try:
+        led = configure_gpio()
+        open_websocket(led)
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+    except:
+        time.sleep(5)
