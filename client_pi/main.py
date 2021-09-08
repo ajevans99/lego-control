@@ -52,5 +52,6 @@ while True:
         open_websocket(led)
     except KeyboardInterrupt:
         GPIO.cleanup()
-    except:
+    except Exception as e:
+        print(e)
         time.sleep(5)
