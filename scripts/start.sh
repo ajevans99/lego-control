@@ -24,12 +24,12 @@ source ../server/venv/bin/activate
 if pip install -r ../server/requirements.txt; then
     echo "Dependencies updated"
 fi
-python ../server/manage.py runserver &
+python ../server/manage.py runserver 0.0.0.0:8000 &>/dev/null & disown
 
 # Run webserver
 cd ../client_web
 echo "Start API and client web servers"
-yarn start &
+yarn start &>/dev/null & disown
 
 # Open Chrome in Kiosk mode
 
